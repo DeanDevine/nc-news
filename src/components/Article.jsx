@@ -4,7 +4,7 @@ import Comments from "./Comments";
 import { getArticle } from "./api";
 
 function Article() {
-  const [article, setArticle] = useState([]);
+  const [article, setArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
 
