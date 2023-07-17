@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Articles({ articles, setArticles }) {
   useEffect(() => {
@@ -24,15 +25,17 @@ function Articles({ articles, setArticles }) {
           comment_count,
         }) => {
           return (
-            <div className="article" key={article_id}>
-              <h2>{title}</h2>
-              <h3>{topic}</h3>
-              <img src={article_img_url} alt={`image for ${title}`} />
-              <p>Posted by: {author}</p>
-              <p>Created at: {created_at}</p>
-              <p>Votes: {votes}</p>
-              <p>Comments: {comment_count}</p>
-            </div>
+            <Link to={`/articles/${article_id}`} key={article_id}>
+              <div className="article">
+                <h2>{title}</h2>
+                <h3>{topic}</h3>
+                <img src={article_img_url} alt={title} />
+                <p>Posted by: {author}</p>
+                <p>Created at: {created_at.slice(0, 10)}</p>
+                <p>Votes: {votes}</p>
+                <p>Comments: {comment_count}</p>
+              </div>
+            </Link>
           );
         }
       )}
