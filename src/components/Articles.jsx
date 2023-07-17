@@ -1,18 +1,20 @@
-import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getArticles } from "./api";
 
 function Articles({ articles, setArticles }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    axios
-      .get("https://be-nc-news-whiy.onrender.com/api/articles")
-      .then(({ data }) => {
-        setArticles(data.articles);
-      });
+    getArticles().then((articlesData) => {
+      setIsLoading(false);
+      setArticles(articlesData);
+    });
   }, []);
 
   return (
     <section>
+      {isLoading ? <p>Loading articles...</p> : null}
       {articles.map(
         ({
           author,

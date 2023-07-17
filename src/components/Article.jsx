@@ -1,47 +1,34 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
+import { getArticle } from "./api";
 
 function Article() {
   const [article, setArticle] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const { article_id } = useParams();
 
   useEffect(() => {
-    axios
-      .get(`https://be-nc-news-whiy.onrender.com/api/articles/${article_id}`)
-      .then(({ data }) => {
-        setArticle([data.article]);
-      });
+    getArticle(article_id).then((articleData) => {
+      setIsLoading(false);
+      setArticle(articleData);
+    });
   }, []);
 
   return (
     <section>
-      {article.map(
-        ({
-          author,
-          title,
-          body,
-          topic,
-          created_at,
-          votes,
-          article_img_url,
-          comment_count,
-        }) => {
-          return (
-            <div className="article" key={article_id}>
-              <h2>{title}</h2>
-              <h3>{topic}</h3>
-              <img src={article_img_url} alt={title} />
-              <div className="article-text">{body}</div>
-              <p>Posted by: {author}</p>
-              <p>Created at: {created_at.slice(0, 10)}</p>
-              <p>Votes: {votes}</p>
-              <p>Comments: {comment_count}</p>
-            </div>
-          );
-        }
-      )}
+      {isLoading ? <p>Loading article...</p> : null}
+
+      <div className="article" key={article_id}>
+        <h2>{article.title}</h2>
+        <h3>{article.topic}</h3>
+        <img src={article.article_img_url} alt={article.title} />
+        <div className="article-text">{article.body}</div>
+        <p>Posted by: {article.author}</p>
+        <p>Created at: {article.created_at}</p>
+        <p>Votes: {article.votes}</p>
+        <p>Comments: {article.comment_count}</p>
+      </div>
       <Comments />
     </section>
   );
