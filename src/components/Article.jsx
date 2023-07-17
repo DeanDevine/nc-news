@@ -15,6 +15,8 @@ function Article() {
     });
   }, []);
 
+  const created_at = new Date(article.created_at).toString();
+
   return (
     <section>
       {isLoading ? <p>Loading article...</p> : null}
@@ -25,7 +27,7 @@ function Article() {
         <img src={article.article_img_url} alt={article.title} />
         <div className="article-text">{article.body}</div>
         <p>Posted by: {article.author}</p>
-        <p>Created at: {article.created_at}</p>
+        <p>Created at: {created_at}</p>
         <p>Votes: {article.votes}</p>
         <p>Comments: {article.comment_count}</p>
       </div>
