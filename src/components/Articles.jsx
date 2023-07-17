@@ -33,7 +33,7 @@ function Articles({ articles, setArticles }) {
                 <h3>{topic}</h3>
                 <img src={article_img_url} alt={title} />
                 <p>Posted by: {author}</p>
-                <p>Created at: {created_at.slice(0, 10)}</p>
+                <p>Created at: {new Date(created_at).toDateString()}</p>
                 <p>Votes: {votes}</p>
                 <p>Comments: {comment_count}</p>
               </div>
