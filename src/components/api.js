@@ -22,9 +22,9 @@ export const getComments = (article_id) => {
   });
 };
 
-export const patchArticle = (article_id, event) => {
+export const patchArticle = (article_id, voteCount) => {
   const patchRequestBody = {
-    inc_votes: event,
+    inc_votes: voteCount,
   };
   return ncnewsApi
     .patch(`/articles/${article_id}`, patchRequestBody)

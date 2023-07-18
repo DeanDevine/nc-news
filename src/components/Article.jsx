@@ -17,16 +17,17 @@ function Article() {
     });
   }, []);
 
-  const handleClick = (event) => {
+  const handleClick = (voteCount) => {
     setArticleVotes((currentArticleVotes) => {
-      return currentArticleVotes + event;
+      return currentArticleVotes + voteCount;
     });
 
-    patchArticle(article_id, event)
+    patchArticle(article_id, voteCount)
       .then(() => {
         setApiError(null);
       })
       .catch((err) => {
+        setArticleVotes(0);
         setApiError(err);
       });
   };
@@ -45,7 +46,9 @@ function Article() {
         <p>Comments: {article.comment_count}</p>
         <button onClick={() => handleClick(1)}>Vote up</button>
         <button onClick={() => handleClick(-1)}>Vote down</button>
-        {apiError ? (
+        {apiError && apiError.message === "Network Error" ? (
+          <p>{apiError.message}</p>
+        ) : apiError ? (
           <p>
             {apiError.response.status}: {apiError.response.data.msg}
           </p>
