@@ -10,7 +10,7 @@ function App() {
   const [articles, setArticles] = useState([]);
 
   return (
-    <div className='app'>
+    <div className="app">
       <Header />
       <Nav />
       <Routes>

@@ -1,7 +1,11 @@
+import { Link } from "react-router-dom";
+
 function Nav() {
   return (
     <nav>
-      <p>NAV</p>
+      <Link to="/">
+        <button>All Articles</button>
+      </Link>
     </nav>
   );
 }
