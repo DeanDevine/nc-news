@@ -24,6 +24,7 @@ function PostComment({ article_id, setComments }) {
         setIsPostingComment(false);
         setCommentBody("");
         setCommentAuthor("");
+        setApiError(null)
       })
       .catch((err) => {
         setIsPostingComment(false);

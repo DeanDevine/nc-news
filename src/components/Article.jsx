@@ -17,27 +17,17 @@ function Article() {
     });
   }, []);
 
-  const handleClickVoteUp = () => {
-    patchArticle(article_id, 1)
-      .then((updatedArticle) => {
-        setArticleVotes((currentArticleVotes) => {
-          return currentArticleVotes + 1;
-        });
-      })
-      .catch((err) => {
-        setApiError(err.response);
-      });
-  };
+  const handleClick = (event) => {
+    setArticleVotes((currentArticleVotes) => {
+      return currentArticleVotes + event;
+    });
 
-  const handleClickVoteDown = () => {
-    patchArticle(article_id, -1)
-      .then((updatedArticle) => {
-        setArticleVotes((currentArticleVotes) => {
-          return currentArticleVotes - 1;
-        });
+    patchArticle(article_id, event)
+      .then(() => {
+        setApiError(null);
       })
       .catch((err) => {
-        setApiError(err.response);
+        setApiError(err);
       });
   };
 
@@ -53,8 +43,8 @@ function Article() {
         <p>Created at: {new Date(article.created_at).toDateString()}</p>
         <p>Votes: {article.votes + articleVotes}</p>
         <p>Comments: {article.comment_count}</p>
-        <button onClick={handleClickVoteUp}>Vote up</button>
-        <button onClick={handleClickVoteDown}>Vote down</button>
+        <button onClick={() => handleClick(1)}>Vote up</button>
+        <button onClick={() => handleClick(-1)}>Vote down</button>
         {apiError ? (
           <p>
             {apiError.response.status}: {apiError.response.data.msg}
