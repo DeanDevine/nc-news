@@ -1,7 +1,7 @@
 function Header() {
   return (
     <header>
-      <h1>HEADER</h1>
+      <h1>NC NEWS</h1>
     </header>
   );
 }
