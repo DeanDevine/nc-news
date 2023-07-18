@@ -15,6 +15,7 @@ function Comments({ article_id }) {
   return (
     <div className="comments-section">
       {isLoading ? <p>Loading comments...</p> : null}
+      {comments.length === 0 ? <p>No comments</p> : null}
       {comments.map(({ comment_id, votes, created_at, author, body }) => {
         return (
           <div className="comment" key={comment_id}>
