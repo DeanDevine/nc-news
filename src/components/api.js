@@ -21,3 +21,15 @@ export const getComments = (article_id) => {
     return data.comments;
   });
 };
+
+export const postComment = (article_id, newComment) => {
+  const postRequestBody = {
+    body: newComment.body,
+    username: newComment.author,
+  };
+  return ncnewsApi
+    .post(`/articles/${article_id}/comments`, postRequestBody)
+    .then(({ data }) => {
+      return data.comment;
+    });
+};
