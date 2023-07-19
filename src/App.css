@@ -86,4 +86,5 @@ select {
   /* border: 3px solid white; */
   padding: 10px;
   margin-bottom: 10px;
+  border-top: 3px solid white;
 }
