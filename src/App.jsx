@@ -5,12 +5,13 @@ import Nav from "./components/Nav";
 import { Route, Routes } from "react-router-dom";
 import Articles from "./components/Articles";
 import Article from "./components/Article";
+import ArticlesByTopic from "./components/ArticlesByTopic";
 
 function App() {
   const [articles, setArticles] = useState([]);
 
   return (
-    <div className="app">
+    <>
       <Header />
       <Nav />
       <Routes>
@@ -18,9 +19,15 @@ function App() {
           path="/"
           element={<Articles articles={articles} setArticles={setArticles} />}
         />
+        <Route
+          path="/:topic"
+          element={
+            <ArticlesByTopic articles={articles} setArticles={setArticles} />
+          }
+        />
         <Route path="/articles/:article_id" element={<Article />} />
       </Routes>
-    </div>
+    </>
   );
 }
 

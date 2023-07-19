@@ -45,17 +45,23 @@ function PostComment({ article_id, setComments }) {
             setCommentBody(event.target.value);
           }}
         />
-        <p></p>
+        <br />
         <label htmlFor="comment-author">Username: </label>
-        <input
+        <select
           id="comment-author"
-          type="text"
           value={commentAuthor}
           onChange={(event) => {
             setCommentAuthor(event.target.value);
           }}
-        />
-        <p></p>
+        >
+          <option value={"tickle122"}>tickle122</option>
+          <option value={"grumpy19"}>grumpy19</option>
+          <option value={"happyamy2016"}>happyamy2016</option>
+          <option value={"cooljmessy"}>cooljmessy</option>
+          <option value={"weegembump"}>weegembump</option>
+          <option value={"jessjelly"}>jessjelly</option>
+        </select>
+        <br />
         <button>Post Comment</button>
       </form>
       {apiError && apiError.message === "Network Error" ? (
