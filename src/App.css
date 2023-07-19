@@ -3,27 +3,27 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 header {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
   width: 1200px;
 }
 
 nav {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
   width: 1200px;
 }
 
 section {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   width: 1200px;
 }
@@ -43,25 +43,25 @@ button {
 }
 
 .article {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .comments-section {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .comment {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
 }
 
 .post-comment {
-  border: 3px solid black;
+  border: 3px solid white;
   padding: 10px;
   margin-bottom: 10px;
 }
