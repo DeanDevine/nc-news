@@ -1,23 +1,73 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useParams,
+  useSearchParams,
+} from "react-router-dom";
 import { getArticles } from "./api";
 
 function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const location = useLocation();
+
   const { topic } = useParams();
+
+  const [searchParams] = useSearchParams();
+
+  const params = Object.fromEntries([...searchParams]);
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles(topic).then((articlesData) => {
+    getArticles(topic, params).then((articlesData) => {
       setIsLoading(false);
       setArticles(articlesData);
     });
-  }, [topic]);
+  }, [topic, searchParams]);
 
   return (
     <section>
+      <div className="query-search-container">
+        <h2>Sort by:</h2>
+        <Link to={`${window.location.pathname}?sort_by=articles.created_at`}>
+          <button>Date</button>
+        </Link>
+        <Link to={`${window.location.pathname}?sort_by=comment_count`}>
+          <button>Comment Count</button>
+        </Link>
+        <Link to={`${window.location.pathname}?sort_by=articles.votes`}>
+          <button>Votes</button>
+        </Link>
+        <h2>Order:</h2>
+        <Link
+          to={
+            /order/.test(location.search)
+              ? location.pathname +
+                location.search.replace(/&order(.*)/, "") +
+                "&order=ASC"
+              : location.search
+              ? location.pathname + location.search + "&order=ASC"
+              : "?order=ASC"
+          }
+        >
+          <button>Ascending</button>
+        </Link>
+        <Link
+          to={
+            /order/.test(location.search)
+              ? location.pathname +
+                location.search.replace(/&order(.*)/, "") +
+                "&order=DESC"
+              : location.search
+              ? location.pathname + location.search + "&order=DESC"
+              : "?order=DESC"
+          }
+        >
+          <button>Descending</button>
+        </Link>
+      </div>
       {isLoading ? <p>Loading articles...</p> : null}
       {articles.map(
         ({

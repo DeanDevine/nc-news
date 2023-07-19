@@ -40,6 +40,13 @@ textarea {
 
 button {
   padding: 10px;
+  margin: 4px;
+}
+
+.query-search-container {
+  border: 3px solid white;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 .article {
