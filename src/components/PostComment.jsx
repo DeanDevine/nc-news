@@ -36,17 +36,19 @@ function PostComment({ article_id, setComments }) {
     <div className="post-comment">
       <form onSubmit={handleSubmit}>
         <label htmlFor="comment-body">Comment: </label>
+        <p></p>
         <textarea
           id="comment-body"
           value={commentBody}
-          rows="4"
-          cols="100"
+          rows="8"
+          cols="110"
           onChange={(event) => {
             setCommentBody(event.target.value);
           }}
         />
-        <br />
+        <p></p>
         <label htmlFor="comment-author">Username: </label>
+        <p></p>
         <select
           id="comment-author"
           value={commentAuthor}
@@ -54,6 +56,7 @@ function PostComment({ article_id, setComments }) {
             setCommentAuthor(event.target.value);
           }}
         >
+          <option></option>
           <option value={"tickle122"}>tickle122</option>
           <option value={"grumpy19"}>grumpy19</option>
           <option value={"happyamy2016"}>happyamy2016</option>
@@ -61,9 +64,10 @@ function PostComment({ article_id, setComments }) {
           <option value={"weegembump"}>weegembump</option>
           <option value={"jessjelly"}>jessjelly</option>
         </select>
-        <br />
+        <p></p>
         <button>Post Comment</button>
       </form>
+      {isPostingComment ? <p>Posting comment...</p> : null}
       {apiError && apiError.message === "Network Error" ? (
         <p>{apiError.message}</p>
       ) : apiError ? (
