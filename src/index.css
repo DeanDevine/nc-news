@@ -1,14 +1,13 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 800;
 
   /* color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424; */
   color: white;
-  background-color: black;
-
+  background-color: rgba(0, 0, 0, 0.926);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -32,7 +31,7 @@ a:visited {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  /* place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
@@ -40,6 +39,11 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #f25b6f;
+}
+
+div {
+  font-size: 20px;
 }
 
 button {
@@ -54,7 +58,8 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  /* border-color: #646cff; */
+  border-color: #f25b6f;
 }
 button:focus,
 button:focus-visible {
@@ -67,7 +72,7 @@ button:focus-visible {
     background-color: #ffffff;
   } */
   a:hover {
-    color: #747bff;
+    color: #f25b6f;
   }
   button {
     background-color: #f9f9f9;
