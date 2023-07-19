@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getArticles } from "./api";
 
-function Articles({ articles, setArticles }) {
+function Articles() {
+  const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { topic } = useParams();
+
   useEffect(() => {
-    getArticles().then((articlesData) => {
+    setIsLoading(true);
+    getArticles(topic).then((articlesData) => {
       setIsLoading(false);
       setArticles(articlesData);
     });
-  }, []);
+  }, [topic]);
 
   return (
     <section>
