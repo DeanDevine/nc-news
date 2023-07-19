@@ -3,6 +3,9 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  border: 3px solid black;
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 header {
@@ -35,10 +38,8 @@ textarea {
   resize: none;
 }
 
-.app {
-  border: 3px solid black;
+button {
   padding: 10px;
-  margin-bottom: 10px;
 }
 
 .article {
