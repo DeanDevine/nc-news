@@ -6,10 +6,12 @@ import {
   useSearchParams,
 } from "react-router-dom";
 import { getArticles } from "./api";
+import Error from "./Error";
 
 function Articles({ setHeader, active, setActive }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [apiError, setApiError] = useState(null);
 
   const location = useLocation();
 
@@ -21,14 +23,28 @@ function Articles({ setHeader, active, setActive }) {
 
   useEffect(() => {
     setIsLoading(true);
-    getArticles(topic, params).then((articlesData) => {
-      {
-        topic ? setHeader(topic) : setHeader("all");
-      }
-      setIsLoading(false);
-      setArticles(articlesData);
-    });
+    getArticles(topic, params)
+      .then((articlesData) => {
+        {
+          topic ? setHeader(topic) : setHeader("all");
+        }
+        setIsLoading(false);
+        setArticles(articlesData);
+        setApiError(null)
+      })
+      .catch((err) => {
+        setApiError(err);
+      });
   }, [topic, searchParams]);
+
+  if (apiError) {
+    return (
+      <Error
+        errorStatus={apiError.response.status}
+        errorMessage={apiError.response.data.msg}
+      />
+    );
+  }
 
   return (
     <section>

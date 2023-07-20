@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import { getArticle, patchArticle } from "./api";
+import Error from "./Error";
 
 function Article({ setHeader, setActive }) {
   const [article, setArticle] = useState({});
@@ -11,15 +12,28 @@ function Article({ setHeader, setActive }) {
   const { article_id } = useParams();
 
   useEffect(() => {
-    getArticle(article_id).then((articleData) => {
-      setHeader(articleData.topic);
-      setActive((curr) => {
-        return curr.splice(0, 1, articleData.topic);
+    getArticle(article_id)
+      .then((articleData) => {
+        setHeader(articleData.topic);
+        setActive((curr) => {
+          return curr.splice(0, 1, articleData.topic);
+        });
+        setIsLoading(false);
+        setArticle(articleData);
+      })
+      .catch((err) => {
+        setApiError(err);
       });
-      setIsLoading(false);
-      setArticle(articleData);
-    });
   }, []);
+
+  if (apiError) {
+    return (
+      <Error
+        errorStatus={apiError.response.status}
+        errorMessage={apiError.response.data.msg}
+      />
+    );
+  }
 
   const handleClick = (voteCount) => {
     setArticleVotes((currentArticleVotes) => {

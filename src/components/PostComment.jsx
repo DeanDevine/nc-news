@@ -27,8 +27,8 @@ function PostComment({ article_id, setComments }) {
         setApiError(null);
       })
       .catch((err) => {
-        setIsPostingComment(false);
         setApiError(err);
+        setIsPostingComment(false);
       });
   };
 
@@ -51,9 +51,9 @@ function PostComment({ article_id, setComments }) {
       </form>
       {isPostingComment ? <p>Posting comment...</p> : null}
       {apiError && apiError.message === "Network Error" ? (
-        <p>{apiError.message}</p>
+        <p style={{ color: "#f25b6f" }}>{apiError.message}</p>
       ) : apiError ? (
-        <p>
+        <p style={{ color: "#f25b6f" }}>
           {apiError.response.status}: {apiError.response.data.msg}
         </p>
       ) : null}
