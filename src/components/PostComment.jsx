@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { postComment } from "./api";
 
-function PostComment({ article_id, setComments }) {
+function PostComment({ article_id, setComments, setUserComments }) {
   const [commentBody, setCommentBody] = useState("");
   const [commentAuthor, setCommentAuthor] = useState("");
   const [isPostingComment, setIsPostingComment] = useState(false);
@@ -19,6 +19,9 @@ function PostComment({ article_id, setComments }) {
     postComment(article_id, newComment)
       .then((commentData) => {
         setComments((current) => {
+          return [commentData, ...current];
+        });
+        setUserComments((current) => {
           return [commentData, ...current];
         });
         setIsPostingComment(false);

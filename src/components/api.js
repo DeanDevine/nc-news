@@ -5,9 +5,17 @@ const ncnewsApi = axios.create({
 });
 
 export const getArticles = (topic, currentParams) => {
-  return ncnewsApi.get("/articles", { params: { topic, sort_by: currentParams.sort_by, order: currentParams.order } }).then(({ data }) => {
-    return data.articles;
-  });
+  return ncnewsApi
+    .get("/articles", {
+      params: {
+        topic,
+        sort_by: currentParams.sort_by,
+        order: currentParams.order,
+      },
+    })
+    .then(({ data }) => {
+      return data.articles;
+    });
 };
 
 export const getArticle = (article_id) => {
@@ -43,4 +51,8 @@ export const postComment = (article_id, newComment) => {
     .then(({ data }) => {
       return data.comment;
     });
+};
+
+export const deleteComment = (comment_id) => {
+  return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {});
 };

@@ -9,7 +9,9 @@ function Nav({ active, setActive }) {
           setActive(["all", "date", "descending"]);
         }}
       >
-        <button id={active.includes('all') ? "active" : ""}>All Articles</button>
+        <button id={active.includes("all") ? "active" : ""}>
+          All Articles
+        </button>
       </Link>
       <Link
         to="/coding"
@@ -17,7 +19,7 @@ function Nav({ active, setActive }) {
           setActive(["coding", "date", "descending"]);
         }}
       >
-        <button id={active.includes('coding') ? "active" : ""}>Coding</button>
+        <button id={active.includes("coding") ? "active" : ""}>Coding</button>
       </Link>
       <Link
         to="/cooking"
@@ -25,7 +27,7 @@ function Nav({ active, setActive }) {
           setActive(["cooking", "date", "descending"]);
         }}
       >
-        <button id={active.includes('cooking') ? "active" : ""}>Cooking</button>
+        <button id={active.includes("cooking") ? "active" : ""}>Cooking</button>
       </Link>
       <Link
         to="/football"
@@ -33,7 +35,19 @@ function Nav({ active, setActive }) {
           setActive(["football", "date", "descending"]);
         }}
       >
-        <button id={active.includes('football') ? "active" : ""}>Football</button>
+        <button id={active.includes("football") ? "active" : ""}>
+          Football
+        </button>
+      </Link>
+      <Link
+        to="/users/user/comments"
+        onClick={() => {
+          setActive(["user", "date", "descending"]);
+        }}
+      >
+        <button id={active.includes("user") ? "active" : ""}>
+          User Comments
+        </button>
       </Link>
     </nav>
   );

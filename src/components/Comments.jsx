@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getComments } from "./api";
 import PostComment from "./PostComment";
 
-function Comments({ article_id }) {
+function Comments({ article_id, setUserComments }) {
   const [comments, setComments] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -15,7 +15,11 @@ function Comments({ article_id }) {
 
   return (
     <>
-      <PostComment article_id={article_id} setComments={setComments} />
+      <PostComment
+        article_id={article_id}
+        setComments={setComments}
+        setUserComments={setUserComments}
+      />
       <div className="comments-section">
         {isLoading ? <p>Loading comments...</p> : null}
         {comments.length === 0 ? <p>No comments</p> : null}
