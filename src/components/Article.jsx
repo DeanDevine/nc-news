@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import { getArticle, patchArticle } from "./api";
+import { HeaderContext } from "../contexts/Header";
 
 function Article() {
+  const {header, setHeader} = useContext(HeaderContext)
   const [article, setArticle] = useState({});
   const [articleVotes, setArticleVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -12,6 +14,7 @@ function Article() {
 
   useEffect(() => {
     getArticle(article_id).then((articleData) => {
+      setHeader(articleData.topic);
       setIsLoading(false);
       setArticle(articleData);
     });
@@ -37,7 +40,6 @@ function Article() {
       <div className="article" key={article_id}>
         {isLoading ? <p>Loading article...</p> : null}
         <h2>{article.title}</h2>
-        <h3>{article.topic}</h3>
         <img src={article.article_img_url} alt={article.title} />
         <div className="article-body">{article.body}</div>
         <p>Posted by: {article.author}</p>

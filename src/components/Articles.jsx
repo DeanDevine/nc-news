@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { getArticles } from "./api";
+import { HeaderContext } from "../contexts/Header";
 
 function Articles() {
+  const { setHeader } = useContext(HeaderContext);
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -11,6 +13,9 @@ function Articles() {
   useEffect(() => {
     setIsLoading(true);
     getArticles(topic).then((articlesData) => {
+      {
+        topic !== undefined ? setHeader(topic) : setHeader("all");
+      }
       setIsLoading(false);
       setArticles(articlesData);
     });
