@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { getArticles } from "./api";
 
-function Articles() {
+function Articles({ setHeader }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,6 +22,9 @@ function Articles() {
   useEffect(() => {
     setIsLoading(true);
     getArticles(topic, params).then((articlesData) => {
+      {
+        topic ? setHeader(topic) : setHeader("all");
+      }
       setIsLoading(false);
       setArticles(articlesData);
     });
@@ -30,7 +33,7 @@ function Articles() {
   return (
     <section>
       <div className="query-search-container">
-        <h2>Sort by:</h2>
+        <h3>Sort by:</h3>
         <Link to={`${window.location.pathname}?sort_by=articles.created_at`}>
           <button>Date</button>
         </Link>
@@ -40,7 +43,7 @@ function Articles() {
         <Link to={`${window.location.pathname}?sort_by=articles.votes`}>
           <button>Votes</button>
         </Link>
-        <h2>Order:</h2>
+        <h3>Order:</h3>
         <Link
           to={
             /order/.test(location.search)
