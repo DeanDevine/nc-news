@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import { getArticle, patchArticle } from "./api";
 
-function Article({ setHeader }) {
+function Article({ setHeader, setActive }) {
   const [article, setArticle] = useState({});
   const [articleVotes, setArticleVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -13,6 +13,9 @@ function Article({ setHeader }) {
   useEffect(() => {
     getArticle(article_id).then((articleData) => {
       setHeader(articleData.topic);
+      setActive((curr) => {
+        return curr.splice(0, 1, articleData.topic);
+      });
       setIsLoading(false);
       setArticle(articleData);
     });

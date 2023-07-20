@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { getArticles } from "./api";
 
-function Articles({ setHeader }) {
+function Articles({ setHeader, active, setActive }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -34,14 +34,40 @@ function Articles({ setHeader }) {
     <section>
       <div className="query-search-container">
         <h3>Sort by:</h3>
-        <Link to={`${window.location.pathname}?sort_by=articles.created_at`}>
-          <button>Date</button>
+        <Link
+          to={`${window.location.pathname}?sort_by=articles.created_at`}
+          onClick={() =>
+            setActive((curr) => {
+              curr.splice(1, 2);
+              return [...curr, "date", "descending"];
+            })
+          }
+        >
+          <button id={active.includes("date") ? "active" : ""}>Date</button>
         </Link>
-        <Link to={`${window.location.pathname}?sort_by=comment_count`}>
-          <button>Comment Count</button>
+        <Link
+          to={`${window.location.pathname}?sort_by=comment_count`}
+          onClick={() =>
+            setActive((curr) => {
+              curr.splice(1, 2);
+              return [...curr, "comment_count", "descending"];
+            })
+          }
+        >
+          <button id={active.includes("comment_count") ? "active" : ""}>
+            Comment Count
+          </button>
         </Link>
-        <Link to={`${window.location.pathname}?sort_by=articles.votes`}>
-          <button>Votes</button>
+        <Link
+          to={`${window.location.pathname}?sort_by=articles.votes`}
+          onClick={() =>
+            setActive((curr) => {
+              curr.splice(1, 2);
+              return [...curr, "votes", "descending"];
+            })
+          }
+        >
+          <button id={active.includes("votes") ? "active" : ""}>Votes</button>
         </Link>
         <h3>Order:</h3>
         <Link
@@ -54,8 +80,16 @@ function Articles({ setHeader }) {
               ? location.pathname + location.search + "&order=ASC"
               : "?order=ASC"
           }
+          onClick={() =>
+            setActive((curr) => {
+              curr.splice(2, 1);
+              return [...curr, "ascending"];
+            })
+          }
         >
-          <button>Ascending</button>
+          <button id={active.includes("ascending") ? "active" : ""}>
+            Ascending
+          </button>
         </Link>
         <Link
           to={
@@ -67,8 +101,16 @@ function Articles({ setHeader }) {
               ? location.pathname + location.search + "&order=DESC"
               : "?order=DESC"
           }
+          onClick={() =>
+            setActive((curr) => {
+              curr.splice(2, 1);
+              return [...curr, "descending"];
+            })
+          }
         >
-          <button>Descending</button>
+          <button id={active.includes("descending") ? "active" : ""}>
+            Descending
+          </button>
         </Link>
       </div>
       {isLoading ? <p>Loading articles...</p> : null}

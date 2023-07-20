@@ -88,3 +88,11 @@ select {
   margin-bottom: 10px;
   border-top: 3px solid white;
 }
+
+/* #nav-button:focus {
+  color: #f25b6f;
+} */
+
+#active {
+  color: #f25b6f;
+}
