@@ -1,8 +1,4 @@
-import { useContext } from "react";
-import { HeaderContext } from "../contexts/Header";
-
-function Header() {
-  const {header} = useContext(HeaderContext)
+function Header({ header }) {
   return (
     <header>
       <h1>NC News</h1>
