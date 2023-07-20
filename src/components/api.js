@@ -5,9 +5,17 @@ const ncnewsApi = axios.create({
 });
 
 export const getArticles = (topic, currentParams) => {
-  return ncnewsApi.get("/articles", { params: { topic, sort_by: currentParams.sort_by, order: currentParams.order } }).then(({ data }) => {
-    return data.articles;
-  });
+  return ncnewsApi
+    .get("/articles", {
+      params: {
+        topic,
+        sort_by: currentParams.sort_by,
+        order: currentParams.order,
+      },
+    })
+    .then(({ data }) => {
+      return data.articles;
+    });
 };
 
 export const getArticle = (article_id) => {
@@ -34,13 +42,25 @@ export const patchArticle = (article_id, voteCount) => {
 };
 
 export const postComment = (article_id, newComment) => {
-  const postRequestBody = {
-    body: newComment.body,
-    username: newComment.author,
-  };
   return ncnewsApi
-    .post(`/articles/${article_id}/comments`, postRequestBody)
+    .post(`/articles/${article_id}/comments`, newComment)
     .then(({ data }) => {
       return data.comment;
     });
+};
+
+export const deleteComment = (comment_id) => {
+  return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {});
+};
+
+export const getCommentsByUsername = (username) => {
+  return ncnewsApi.get(`/users/${username}/comments`).then(({ data }) => {
+    return data.comments;
+  });
+};
+
+export const getUsername = (username) => {
+  return ncnewsApi.get(`users/${username}`).then(({ data }) => {
+    return data.user;
+  });
 };
