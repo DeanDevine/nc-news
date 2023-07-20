@@ -49,6 +49,14 @@ function Nav({ active, setActive }) {
           User Comments
         </button>
       </Link>
+      <Link
+        to="/sign-in"
+        onClick={() => {
+          setActive(["sign-in", "date", "descending"]);
+        }}
+      >
+        <button id={active.includes("sign-in") ? "active" : ""}>Sign In</button>
+      </Link>
     </nav>
   );
 }

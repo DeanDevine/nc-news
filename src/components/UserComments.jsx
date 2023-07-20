@@ -1,29 +1,58 @@
-import { useEffect, useState } from "react";
-import { deleteComment } from "./api";
+import { useContext, useEffect, useState } from "react";
+import { deleteComment, getCommentsByUsername } from "./api";
+import { UserContext } from "../contexts/User";
 
-function UserComments({ setHeader, userComments, setUserComments }) {
+function UserComments({ setHeader }) {
+  const { user } = useContext(UserContext);
+  const [comments, setComments] = useState([]);
+  const [isRemovingComment, setIsRemovingComment] = useState(false);
   const [commentRemoved, setCommentRemoved] = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(true);
+  const [apiError, setApiError] = useState(null);
 
   useEffect(() => {
-    setHeader("user");
-  });
+    setHeader(`${user} comments`);
+    getCommentsByUsername(user)
+      .then((commentsData) => {
+        setComments(commentsData);
+        setApiError(null);
+      })
+      .catch(() => {
+        setIsSignedIn(false);
+      });
+  }, []);
 
   const handleClick = (comment_id) => {
-    deleteComment(comment_id).then(() => {
-      setCommentRemoved(true);
-      setUserComments((current) => {
-        return current.filter((comment) => {
-          return comment.comment_id !== comment_id;
+    setIsRemovingComment(true);
+    deleteComment(comment_id)
+      .then(() => {
+        setIsRemovingComment(false);
+        setCommentRemoved(true);
+        setComments((current) => {
+          return current.filter((comment) => {
+            return comment.comment_id !== comment_id;
+          });
         });
+      })
+      .catch((err) => {
+        setApiError(err);
       });
-    });
   };
 
   return (
     <div className="user-comments">
-      {!userComments.length ? <p>You have not posted any comments</p> : null}
-      {commentRemoved ? <p>Comment removed</p> : null}
-      {userComments.map(({ comment_id, body, created_at }) => {
+      {!isSignedIn ? (
+        <p>Please sign in to view comments</p>
+      ) : isSignedIn && !comments.length ? (
+        <p>You have not posted any comments</p>
+      ) : null}
+      {isRemovingComment ? (
+        <p>Removing comment...</p>
+      ) : commentRemoved ? (
+        <p>Comment removed</p>
+      ) : null}
+      {apiError ? <p>Something has gone wrong</p> : null}
+      {comments.map(({ comment_id, body, created_at }) => {
         return (
           <div className="comment" key={comment_id}>
             <div className="comment-body">{body}</div>

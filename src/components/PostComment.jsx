@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { postComment } from "./api";
+import { UserContext } from "../contexts/User";
 
-function PostComment({ article_id, setComments, setUserComments }) {
+function PostComment({ article_id, setComments }) {
+  const { user } = useContext(UserContext);
   const [commentBody, setCommentBody] = useState("");
-  const [commentAuthor, setCommentAuthor] = useState("");
   const [isPostingComment, setIsPostingComment] = useState(false);
   const [apiError, setApiError] = useState(null);
 
@@ -11,7 +12,7 @@ function PostComment({ article_id, setComments, setUserComments }) {
     event.preventDefault();
     const newComment = {
       body: commentBody,
-      author: commentAuthor,
+      username: user,
     };
 
     setIsPostingComment(true);
@@ -21,12 +22,8 @@ function PostComment({ article_id, setComments, setUserComments }) {
         setComments((current) => {
           return [commentData, ...current];
         });
-        setUserComments((current) => {
-          return [commentData, ...current];
-        });
         setIsPostingComment(false);
         setCommentBody("");
-        setCommentAuthor("");
         setApiError(null);
       })
       .catch((err) => {
@@ -49,24 +46,6 @@ function PostComment({ article_id, setComments, setUserComments }) {
             setCommentBody(event.target.value);
           }}
         />
-        <p></p>
-        <label htmlFor="comment-author">Username: </label>
-        <p></p>
-        <select
-          id="comment-author"
-          value={commentAuthor}
-          onChange={(event) => {
-            setCommentAuthor(event.target.value);
-          }}
-        >
-          <option></option>
-          <option value={"tickle122"}>tickle122</option>
-          <option value={"grumpy19"}>grumpy19</option>
-          <option value={"happyamy2016"}>happyamy2016</option>
-          <option value={"cooljmessy"}>cooljmessy</option>
-          <option value={"weegembump"}>weegembump</option>
-          <option value={"jessjelly"}>jessjelly</option>
-        </select>
         <p></p>
         <button>Post Comment</button>
       </form>

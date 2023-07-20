@@ -6,11 +6,11 @@ import Articles from "./components/Articles";
 import Article from "./components/Article";
 import { useState } from "react";
 import UserComments from "./components/UserComments";
+import SignInPage from "./components/SignInPage";
 
 function App() {
   const [header, setHeader] = useState("all");
   const [active, setActive] = useState(["all", "date", "descending"]);
-  const [userComments, setUserComments] = useState([]);
   return (
     <>
       <Header header={header} />
@@ -38,23 +38,12 @@ function App() {
         />
         <Route
           path="/articles/:article_id"
-          element={
-            <Article
-              setHeader={setHeader}
-              setActive={setActive}
-              setUserComments={setUserComments}
-            />
-          }
+          element={<Article setHeader={setHeader} setActive={setActive} />}
         />
+        <Route path="/sign-in" element={<SignInPage setHeader={setHeader} />} />
         <Route
           path="/users/user/comments"
-          element={
-            <UserComments
-              setHeader={setHeader}
-              userComments={userComments}
-              setUserComments={setUserComments}
-            />
-          }
+          element={<UserComments setHeader={setHeader} />}
         />
       </Routes>
     </>

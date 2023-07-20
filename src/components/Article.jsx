@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Comments from "./Comments";
 import { getArticle, patchArticle } from "./api";
 
-function Article({ setHeader, setActive, setUserComments }) {
+function Article({ setHeader, setActive }) {
   const [article, setArticle] = useState({});
   const [articleVotes, setArticleVotes] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +57,7 @@ function Article({ setHeader, setActive, setUserComments }) {
           </p>
         ) : null}
       </div>
-      <Comments article_id={article_id} setUserComments={setUserComments} />
+      <Comments article_id={article_id} />
     </section>
   );
 }
