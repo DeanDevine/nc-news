@@ -14,7 +14,7 @@ function Nav({ active, setActive }) {
         </button>
       </Link>
       <Link
-        to="/coding"
+        to="/topics/coding"
         onClick={() => {
           setActive(["coding", "date", "descending"]);
         }}
@@ -22,7 +22,7 @@ function Nav({ active, setActive }) {
         <button id={active.includes("coding") ? "active" : ""}>Coding</button>
       </Link>
       <Link
-        to="/cooking"
+        to="/topics/cooking"
         onClick={() => {
           setActive(["cooking", "date", "descending"]);
         }}
@@ -30,7 +30,7 @@ function Nav({ active, setActive }) {
         <button id={active.includes("cooking") ? "active" : ""}>Cooking</button>
       </Link>
       <Link
-        to="/football"
+        to="/topics/football"
         onClick={() => {
           setActive(["football", "date", "descending"]);
         }}

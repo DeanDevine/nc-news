@@ -7,6 +7,7 @@ import Article from "./components/Article";
 import { useState } from "react";
 import UserComments from "./components/UserComments";
 import SignInPage from "./components/SignInPage";
+import Error from "./components/Error";
 
 function App() {
   const [header, setHeader] = useState("all");
@@ -27,7 +28,7 @@ function App() {
           }
         />
         <Route
-          path="/:topic"
+          path="/topics/:topic"
           element={
             <Articles
               setHeader={setHeader}
@@ -44,6 +45,10 @@ function App() {
         <Route
           path="/users/user/comments"
           element={<UserComments setHeader={setHeader} />}
+        />
+        <Route
+          path="*"
+          element={<Error errorStatus={404} errorMessage={"Not Found"} />}
         />
       </Routes>
     </>
