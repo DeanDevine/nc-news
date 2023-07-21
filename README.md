@@ -37,7 +37,7 @@ To comment on an article a user must first sign in on a valid username. Valid us
 
 git clone https://github.com/DeanDevine/nc-news.git
 
-**Install axios, react, react-dom, react-router-dom and vite package dependencies with the following command in the terminal:**
+**Install package dependencies with the following command in the terminal:**
 
 npm install
 
