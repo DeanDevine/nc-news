@@ -12,7 +12,7 @@ function SignInPage({ setHeader }) {
     if (user) {
       setResponse(`You are signed in as ${user}`);
     }
-  });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

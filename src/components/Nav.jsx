@@ -40,6 +40,17 @@ function Nav({ active, setActive }) {
         </button>
       </Link>
       <Link
+        to="/articles/post-article"
+        onClick={() => {
+          setActive(["post-article", "date", "descending"]);
+        }}
+      >
+        <button id={active.includes("post-article") ? "active" : ""}>
+          Post Article
+        </button>
+      </Link>
+      <p></p>
+      <Link
         to="/users/user/comments"
         onClick={() => {
           setActive(["user", "date", "descending"]);
@@ -55,7 +66,9 @@ function Nav({ active, setActive }) {
           setActive(["create-user", "date", "descending"]);
         }}
       >
-        <button id={active.includes("create-user") ? "active" : ""}>Create User</button>
+        <button id={active.includes("create-user") ? "active" : ""}>
+          Create User
+        </button>
       </Link>
       <Link
         to="/sign-in"
