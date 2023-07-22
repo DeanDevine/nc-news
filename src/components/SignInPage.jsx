@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getUsername } from "./api";
+import { getUser } from "./api";
 import { UserContext } from "../contexts/User";
 
 function SignInPage({ setHeader }) {
@@ -10,13 +10,13 @@ function SignInPage({ setHeader }) {
   useEffect(() => {
     setHeader("sign in");
     if (user) {
-      setResponse("You have been signed in");
+      setResponse(`You are signed in as ${user}`);
     }
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUsername(usernameInput)
+    getUser(usernameInput)
       .then((userData) => {
         setUser(userData.username);
         setResponse(`You have successfully signed in as ${userData.username}`);
