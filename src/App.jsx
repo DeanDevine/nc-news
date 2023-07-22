@@ -10,6 +10,8 @@ import SignInPage from "./components/SignInPage";
 import Error from "./components/Error";
 import CreateUser from "./components/CreateUser";
 import PostArticle from "./components/PostArticle";
+import UserProfile from "./components/UserProfile";
+import UserPage from "./components/UserPage";
 
 function App() {
   const [header, setHeader] = useState("all");
@@ -17,7 +19,7 @@ function App() {
   return (
     <>
       <Header header={header} />
-      <Nav active={active} setActive={setActive} />
+      <Nav active={active} setActive={setActive} setHeader={setHeader} />
       <Routes>
         <Route
           path="/"
@@ -53,8 +55,16 @@ function App() {
         />
         <Route path="/sign-in" element={<SignInPage setHeader={setHeader} />} />
         <Route
+          path="/users/user/profile"
+          element={<UserProfile setHeader={setHeader} />}
+        />
+        <Route
           path="/users/user/comments"
           element={<UserComments setHeader={setHeader} />}
+        />
+        <Route
+          path="/users/user/:username"
+          element={<UserPage setHeader={setHeader} setActive={setActive} />}
         />
         <Route
           path="*"
