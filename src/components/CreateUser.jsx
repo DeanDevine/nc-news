@@ -4,7 +4,7 @@ import { postUser } from "./api";
 function CreateUser({ setHeader }) {
   const [usernameInput, setUsernameInput] = useState("");
   const [nameInput, setNameInput] = useState("");
-  const [avatarUrlInput, setAvatarUrlInput] = useState("");
+  const [avatarUrlInput, setAvatarUrlInput] = useState();
   const [response, setResponse] = useState("");
 
   const newUser = {
@@ -24,13 +24,13 @@ function CreateUser({ setHeader }) {
         setResponse(`User ${userData.username} successfully created`);
         setUsernameInput("");
         setNameInput("");
-        setAvatarUrlInput("");
+        setAvatarUrlInput();
       })
       .catch((err) => {
         setResponse(err.response.data.msg);
         setUsernameInput("");
         setNameInput("");
-        setAvatarUrlInput("");
+        setAvatarUrlInput();
       });
   };
 

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { deleteComment, getComments, patchComment } from "./api";
 import PostComment from "./PostComment";
 import { UserContext } from "../contexts/User";
+import { Link } from "react-router-dom";
 
 function Comments({ article_id, setCommentsCount }) {
   const { user } = useContext(UserContext);
@@ -81,7 +82,9 @@ function Comments({ article_id, setCommentsCount }) {
           return (
             <div className="comment" key={comment_id}>
               <div className="comment-body">{body}</div>
-              <p>Posted by: {author}</p>
+              <p>
+                Posted by: <Link to={`/users/user/${author}`}>{author}</Link>
+              </p>
               <p>Created at: {new Date(created_at).toDateString()}</p>
               <p>
                 Votes: {""}

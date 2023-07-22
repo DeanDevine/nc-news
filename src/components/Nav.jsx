@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../contexts/User";
 
-function Nav({ active, setActive }) {
+function Nav({ active, setActive, setHeader }) {
   const { user, setUser } = useContext(UserContext);
   return (
     <nav>
@@ -53,6 +53,17 @@ function Nav({ active, setActive }) {
         </button>
       </Link>
       <p></p>
+      <Link
+        to="/users/user/profile"
+        onClick={() => {
+          setActive(["user-profile", "date", "descending"]);
+          setHeader("user profile");
+        }}
+      >
+        <button id={active.includes("user-profile") ? "active" : ""}>
+          User Profile
+        </button>
+      </Link>
       <Link
         to="/users/user/comments"
         onClick={() => {

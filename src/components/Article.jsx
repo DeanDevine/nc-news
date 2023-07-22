@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Comments from "./Comments";
 import { getArticle, patchArticle } from "./api";
 import Error from "./Error";
@@ -62,7 +62,10 @@ function Article({ setHeader, setActive }) {
         <h2>{article.title}</h2>
         <img src={article.article_img_url} alt={article.title} />
         <div className="article-body">{article.body}</div>
-        <p>Posted by: {article.author}</p>
+        <p>
+          Posted by:{" "}
+          <Link to={`/users/user/${article.author}`}>{article.author}</Link>
+        </p>
         <p>Created at: {new Date(article.created_at).toDateString()}</p>
         <p>Votes: {article.votes + articleVotes}</p>
         <p>Comments: {Number(article.comment_count) + commentsCount}</p>
