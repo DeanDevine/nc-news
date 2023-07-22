@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { postComment } from "./api";
 import { UserContext } from "../contexts/User";
 
-function PostComment({ article_id, setComments }) {
+function PostComment({ article_id, setComments, setCommentsCount }) {
   const { user } = useContext(UserContext);
   const [commentBody, setCommentBody] = useState("");
   const [isPostingComment, setIsPostingComment] = useState(false);
@@ -21,6 +21,9 @@ function PostComment({ article_id, setComments }) {
       .then((commentData) => {
         setComments((current) => {
           return [commentData, ...current];
+        });
+        setCommentsCount((current) => {
+          return current + 1;
         });
         setIsPostingComment(false);
         setCommentBody("");

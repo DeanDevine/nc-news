@@ -58,7 +58,7 @@ function UserComments({ setHeader }) {
             <div className="comment-body">{body}</div>
             <p>Created at: {new Date(created_at).toDateString()} </p>
             <button onClick={() => handleClick(comment_id)}>
-              Delete Comment
+              Remove Comment
             </button>
           </div>
         );

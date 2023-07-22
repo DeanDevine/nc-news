@@ -30,6 +30,18 @@ export const getComments = (article_id) => {
   });
 };
 
+export const getCommentsByUsername = (username) => {
+  return ncnewsApi.get(`/users/${username}/comments`).then(({ data }) => {
+    return data.comments;
+  });
+};
+
+export const getUser = (username) => {
+  return ncnewsApi.get(`/users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};
+
 export const patchArticle = (article_id, voteCount) => {
   const patchRequestBody = {
     inc_votes: voteCount,
@@ -41,6 +53,23 @@ export const patchArticle = (article_id, voteCount) => {
     });
 };
 
+export const patchComment = (comment_id, voteCount) => {
+  const patchRequestBody = {
+    inc_votes: voteCount,
+  };
+  return ncnewsApi
+    .patch(`/comments/${comment_id}`, patchRequestBody)
+    .then(({ data }) => {
+      return data.comment;
+    });
+};
+
+export const postArticle = (newArticle) => {
+  return ncnewsApi.post("/articles", newArticle).then(({ data }) => {
+    return data.article;
+  });
+};
+
 export const postComment = (article_id, newComment) => {
   return ncnewsApi
     .post(`/articles/${article_id}/comments`, newComment)
@@ -49,24 +78,12 @@ export const postComment = (article_id, newComment) => {
     });
 };
 
-export const deleteComment = (comment_id) => {
-  return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {});
-};
-
-export const getCommentsByUsername = (username) => {
-  return ncnewsApi.get(`/users/${username}/comments`).then(({ data }) => {
-    return data.comments;
-  });
-};
-
-export const getUser = (username) => {
-  return ncnewsApi.get(`users/${username}`).then(({ data }) => {
-    return data.user;
-  });
-};
-
 export const postUser = (user) => {
   return ncnewsApi.post("/users", user).then(({ data }) => {
     return data.user;
   });
+};
+
+export const deleteComment = (comment_id) => {
+  return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {});
 };

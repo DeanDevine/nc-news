@@ -9,6 +9,7 @@ import UserComments from "./components/UserComments";
 import SignInPage from "./components/SignInPage";
 import Error from "./components/Error";
 import CreateUser from "./components/CreateUser";
+import PostArticle from "./components/PostArticle";
 
 function App() {
   const [header, setHeader] = useState("all");
@@ -41,6 +42,10 @@ function App() {
         <Route
           path="/articles/:article_id"
           element={<Article setHeader={setHeader} setActive={setActive} />}
+        />
+        <Route
+          path="/articles/post-article"
+          element={<PostArticle setHeader={setHeader} />}
         />
         <Route
           path="/users/create-user"
