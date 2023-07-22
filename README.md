@@ -18,18 +18,14 @@ https://be-nc-news-whiy.onrender.com/api/
 
 Users can currently:
 
-* view articles - these can be filtered by topic and sorted with * queries
-* like/dislike articles
-* comment on articles and remove their comments
+- view articles - these can be filtered by topic and sorted with queries
+- vote on articles and comments
+- create a new user and sign in/out as that user
+- comment on articles and remove their own comments
+- post new articles
+- remove their own articles
 
-To comment on an article a user must first sign in on a valid username. Valid usernames are:
-
-* tickle122
-* grumpy19
-* happyamy2016
-* cooljmessy
-* weegembump
-* jessjelly
+To post a new article or comment on an article a user must first create a new username and then sign in as that user.
 
 # Instructions on running this project locally:
 
