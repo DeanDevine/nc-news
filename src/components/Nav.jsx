@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../contexts/User";
 
 function Nav({ active, setActive }) {
+  const { user, setUser } = useContext(UserContext);
   return (
     <nav>
       <Link
@@ -76,7 +79,14 @@ function Nav({ active, setActive }) {
           setActive(["sign-in", "date", "descending"]);
         }}
       >
-        <button id={active.includes("sign-in") ? "active" : ""}>Sign In</button>
+        {!user ? (
+          <button id={active.includes("sign-in") ? "active" : ""}>
+            Sign In
+          </button>
+        ) : null}
+      </Link>
+      <Link to="/">
+        {user ? <button onClick={() => setUser()}>Sign Out</button> : null}
       </Link>
     </nav>
   );

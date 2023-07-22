@@ -4,6 +4,7 @@ import Comments from "./Comments";
 import { getArticle, patchArticle } from "./api";
 import Error from "./Error";
 import { UserContext } from "../contexts/User";
+import RemoveArticle from "./RemoveArticle";
 
 function Article({ setHeader, setActive }) {
   const { user } = useContext(UserContext);
@@ -11,6 +12,7 @@ function Article({ setHeader, setActive }) {
   const [articleVotes, setArticleVotes] = useState(0);
   const [commentsCount, setCommentsCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [isRemoved, setIsRemoved] = useState(false);
   const [apiError, setApiError] = useState(null);
   const { article_id } = useParams();
 
@@ -27,7 +29,7 @@ function Article({ setHeader, setActive }) {
       .catch((err) => {
         setApiError(err);
       });
-  }, []);
+  }, [isRemoved]);
 
   if (apiError) {
     return (
@@ -70,6 +72,12 @@ function Article({ setHeader, setActive }) {
         {user !== article.author ? (
           <button onClick={() => handleClick(-1)}>Vote down</button>
         ) : null}
+        <RemoveArticle
+          article_id={article_id}
+          author={article.author}
+          user={user}
+          setIsRemoved={setIsRemoved}
+        />
         {apiError && apiError.message === "Network Error" ? (
           <p>{apiError.message}</p>
         ) : apiError ? (

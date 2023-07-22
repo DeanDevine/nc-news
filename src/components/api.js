@@ -84,6 +84,10 @@ export const postUser = (user) => {
   });
 };
 
+export const deleteArticle = (article_id) => {
+  return ncnewsApi.delete(`/articles/${article_id}`).then(() => {});
+};
+
 export const deleteComment = (comment_id) => {
   return ncnewsApi.delete(`/comments/${comment_id}`).then(() => {});
 };
