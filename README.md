@@ -21,6 +21,7 @@ Users can currently:
 - view articles - these can be filtered by topic and sorted with queries
 - vote on articles and comments
 - create a new user and sign in/out as that user
+- view own user profile and other users' profiles
 - comment on articles and remove their own comments
 - post new articles
 - remove their own articles
