@@ -8,6 +8,7 @@ import { useState } from "react";
 import UserComments from "./components/UserComments";
 import SignInPage from "./components/SignInPage";
 import Error from "./components/Error";
+import CreateUser from "./components/CreateUser";
 
 function App() {
   const [header, setHeader] = useState("all");
@@ -40,6 +41,10 @@ function App() {
         <Route
           path="/articles/:article_id"
           element={<Article setHeader={setHeader} setActive={setActive} />}
+        />
+        <Route
+          path="/users/create-user"
+          element={<CreateUser setHeader={setHeader} />}
         />
         <Route path="/sign-in" element={<SignInPage setHeader={setHeader} />} />
         <Route

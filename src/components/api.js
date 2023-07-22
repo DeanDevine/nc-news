@@ -59,8 +59,14 @@ export const getCommentsByUsername = (username) => {
   });
 };
 
-export const getUsername = (username) => {
+export const getUser = (username) => {
   return ncnewsApi.get(`users/${username}`).then(({ data }) => {
+    return data.user;
+  });
+};
+
+export const postUser = (user) => {
+  return ncnewsApi.post("/users", user).then(({ data }) => {
     return data.user;
   });
 };
