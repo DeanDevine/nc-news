@@ -2,24 +2,28 @@ import { useContext, useEffect, useState } from "react";
 import { deleteComment, getCommentsByUsername } from "./api";
 import { UserContext } from "../contexts/User";
 
-function UserComments({ setHeader }) {
+function UserComments() {
   const { user } = useContext(UserContext);
   const [comments, setComments] = useState([]);
   const [isRemovingComment, setIsRemovingComment] = useState(false);
   const [commentRemoved, setCommentRemoved] = useState(false);
-  const [isSignedIn, setIsSignedIn] = useState(true);
   const [apiError, setApiError] = useState(null);
 
+  if (!user) {
+    return (
+      <div className="">
+        <p className="">You are not signed in</p>
+      </div>
+    );
+  }
+
   useEffect(() => {
-    setHeader(`${user} comments`);
     getCommentsByUsername(user)
       .then((commentsData) => {
         setComments(commentsData);
         setApiError(null);
       })
-      .catch(() => {
-        setIsSignedIn(false);
-      });
+      .catch(() => {});
   }, []);
 
   const handleClick = (comment_id) => {
@@ -41,17 +45,13 @@ function UserComments({ setHeader }) {
 
   return (
     <div className="user-comments">
-      {!isSignedIn ? (
-        <p>Please sign in to view comments</p>
-      ) : isSignedIn && !comments.length ? (
-        <p>You have not posted any comments</p>
-      ) : null}
       {isRemovingComment ? (
         <p>Removing comment...</p>
       ) : commentRemoved ? (
         <p>Comment removed</p>
       ) : null}
-      {apiError ? <p>Something has gone wrong</p> : null}
+      {user && !comments.length && <p>You have not posted any comments</p>}
+      {apiError && <p>Something has gone wrong</p>}
       {comments.map(({ comment_id, body, created_at }) => {
         return (
           <div className="comment" key={comment_id}>

@@ -64,6 +64,18 @@ export const patchComment = (comment_id, voteCount) => {
     });
 };
 
+export const patchUser = (username, name, avatar_url) => {
+  const patchRequestBody = {
+    name: name,
+    avatar_url: avatar_url,
+  };
+  return ncnewsApi
+    .patch(`/users/${username}`, patchRequestBody)
+    .then(({ data }) => {
+      return data.user;
+    });
+};
+
 export const postArticle = (newArticle) => {
   return ncnewsApi.post("/articles", newArticle).then(({ data }) => {
     return data.article;

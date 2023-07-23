@@ -23,48 +23,24 @@ function App() {
       <Routes>
         <Route
           path="/"
-          element={
-            <Articles
-              setHeader={setHeader}
-              active={active}
-              setActive={setActive}
-            />
-          }
+          element={<Articles active={active} setActive={setActive} />}
         />
         <Route
           path="/topics/:topic"
-          element={
-            <Articles
-              setHeader={setHeader}
-              active={active}
-              setActive={setActive}
-            />
-          }
+          element={<Articles active={active} setActive={setActive} />}
         />
         <Route
           path="/articles/:article_id"
           element={<Article setHeader={setHeader} setActive={setActive} />}
         />
-        <Route
-          path="/articles/post-article"
-          element={<PostArticle setHeader={setHeader} />}
-        />
-        <Route
-          path="/users/create-user"
-          element={<CreateUser setHeader={setHeader} />}
-        />
-        <Route path="/sign-in" element={<SignInPage setHeader={setHeader} />} />
-        <Route
-          path="/users/user/profile"
-          element={<UserProfile setHeader={setHeader} />}
-        />
-        <Route
-          path="/users/user/comments"
-          element={<UserComments setHeader={setHeader} />}
-        />
+        <Route path="/articles/post-article" element={<PostArticle />} />
+        <Route path="/users/create-user" element={<CreateUser />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/users/user/profile" element={<UserProfile />} />
+        <Route path="/users/user/comments" element={<UserComments />} />
         <Route
           path="/users/user/:username"
-          element={<UserPage setHeader={setHeader} setActive={setActive} />}
+          element={<UserPage setActive={setActive} />}
         />
         <Route
           path="*"

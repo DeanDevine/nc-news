@@ -2,22 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/User";
 import { postArticle } from "./api";
 
-function PostArticle({ setHeader }) {
+function PostArticle() {
   const { user } = useContext(UserContext);
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [topic, setTopic] = useState("");
   const [articleImgUrl, setArticleImgUrl] = useState();
   const [isPostingArticle, setIsPostingArticle] = useState(false);
-  const [response, setResponse] = useState("");
+  const [isPosted, setIsPosted] = useState("");
   const [apiError, setApiError] = useState(null);
 
-  useEffect(() => {
-    setHeader("post article");
-    if (!user) {
-      setResponse("Please sign in to post a new article");
-    }
-  }, []);
+  if (!user) {
+    return (
+      <div className="">
+        <p className="">Please sign in to post a new article</p>
+      </div>
+    );
+  }
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -34,7 +35,7 @@ function PostArticle({ setHeader }) {
     postArticle(newArticle)
       .then(() => {
         setIsPostingArticle(false);
-        setResponse("Article posted");
+        setIsPosted("Article posted");
         setTitle("");
         setBody("");
         setArticleImgUrl();
@@ -43,7 +44,7 @@ function PostArticle({ setHeader }) {
       .catch((err) => {
         setApiError(err);
         setIsPostingArticle(false);
-        setResponse("");
+        setIsPosted("");
       });
   };
 
@@ -98,7 +99,7 @@ function PostArticle({ setHeader }) {
         <p></p>
         <button>Post Article</button>
       </form>
-      {isPostingArticle ? <p>Posting article...</p> : <p>{response}</p>}
+      {isPostingArticle ? <p>Posting article...</p> : <p>{isPosted}</p>}
       {apiError && apiError.message === "Network Error" ? (
         <p style={{ color: "#f25b6f" }}>{apiError.message}</p>
       ) : apiError ? (

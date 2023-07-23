@@ -3,14 +3,13 @@ import { useParams } from "react-router-dom";
 import { getUser } from "./api";
 import Error from "./Error";
 
-function UserPage({ setHeader, setActive }) {
+function UserPage({ setActive }) {
   const [userInfo, setUserInfo] = useState({});
   const [apiError, setApiError] = useState(null);
 
   const { username } = useParams();
 
   useEffect(() => {
-    setHeader(`${username} user page`);
     setActive([]);
     getUser(username)
       .then((userData) => {
