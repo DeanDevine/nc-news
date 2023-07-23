@@ -7,7 +7,7 @@ function Header({ header }) {
     <header>
       <h1>NC News</h1>
       <h2>{header}</h2>
-      {user ? <h3>Signed in as {user}</h3> : null}
+      {user ? <h3>signed in as {user}</h3> : null}
     </header>
   );
 }

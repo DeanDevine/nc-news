@@ -8,7 +8,7 @@ import {
 import { getArticles } from "./api";
 import Error from "./Error";
 
-function Articles({ setHeader, active, setActive }) {
+function Articles({ active, setActive }) {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
@@ -25,9 +25,6 @@ function Articles({ setHeader, active, setActive }) {
     setIsLoading(true);
     getArticles(topic, params)
       .then((articlesData) => {
-        {
-          topic ? setHeader(topic) : setHeader("all");
-        }
         setIsLoading(false);
         setArticles(articlesData);
         setApiError(null);

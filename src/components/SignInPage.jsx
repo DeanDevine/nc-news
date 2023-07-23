@@ -2,17 +2,18 @@ import { useContext, useEffect, useState } from "react";
 import { getUser } from "./api";
 import { UserContext } from "../contexts/User";
 
-function SignInPage({ setHeader }) {
+function SignInPage() {
   const { user, setUser } = useContext(UserContext);
   const [usernameInput, setUsernameInput] = useState("");
-  const [response, setResponse] = useState("");
+  const [error, setError] = useState("");
 
-  useEffect(() => {
-    setHeader("sign in");
-    if (user) {
-      setResponse(`You are signed in as ${user}`);
-    }
-  }, []);
+  if (user) {
+    return (
+      <div className="">
+        <p className="">You are signed in as {user}</p>
+      </div>
+    );
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +24,7 @@ function SignInPage({ setHeader }) {
         setUsernameInput("");
       })
       .catch(() => {
-        setResponse("Username does not exist");
-        setUsernameInput("");
+        setError("Username does not exist");
       });
   };
 
@@ -43,7 +43,7 @@ function SignInPage({ setHeader }) {
         <p></p>
         <button>Sign In</button>
       </form>
-      <p>{response}</p>
+      <p>{error}</p>
     </div>
   );
 }
